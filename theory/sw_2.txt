@@ -102,3 +102,20 @@
             - 클래스 경량화
         - Proxy
             - 대리 객체 수행
+    - 행위 패턴
+        - Chain of Responsibility
+        - Command
+        - Interpreter
+            - 언어에 문법 표현 적용
+        - Iterator
+        - Mediator
+            - 복잡한 상호작용을 캡슐화하여 객체로 정의후 중재
+        - Memento
+            - 캡슐화 유지
+        - Observer
+            - 상태 변화 시 상속된 객체들의 변화 전달
+        - State
+        - Strategy
+            - 캡슐화하여 상호 교환
+        - Template Method
+        - Visitor
