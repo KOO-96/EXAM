@@ -89,3 +89,130 @@ class Ovr2 extends Ovr1 {
 정답
 11
 ```
+
+23년 1회 기출
+```bash
+class Parent {
+    int x = 1000;
+    
+    Parent() {
+        this(3000);
+    }
+    
+    Parent(int x) {
+        this.x = x;
+    }
+}
+
+class Child extends Parent {
+    int x = 4000;
+    
+    Child() {
+        this(5000);
+    }
+    
+    Child(int x) {
+        this.x = x;
+    }
+
+    int getX() {
+        return x;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child obk = new Child();
+        System.out.println(obk.getX());
+    }
+}
+정답
+5000
+```
+
+23년 3회 실기
+```bash
+class Parent {
+    int compute(int num) {
+        if(num <= 1)
+            return num;
+        return compute(num-1) + compute(num-2);
+    }
+}
+
+class Child extends Parent {
+    int compute(int num) {
+        if(num <= 1)
+            return num;
+        return compute(num-1) + compute(num-3);
+    }
+}
+
+public class main {
+    public static void main(String args[]) {
+        Parent obj = new Child(); // 제일 중요한 부분 --> 참조 변수가 Parent 근데 실제 객체는 Child
+        System.out.print(obj.compute(7)); // 결국 Child.compute(7)
+    }
+}
+// Child의 compute만 사용함
+compute(-1) = -1
+compute(0) = 0
+compute(1) = 1
+compute(2) = compute(1) + compute(-1) = 1 - 1 = 0
+...
+compute(7) = compute(6) + compute(5) = 1 + 1 = 2
+
+정답
+2
+```
+
+20년 4회 기출
+```bash
+class Parent {
+    public int compute(int num) {
+        if(num <= 1) return num;
+        return compute(num-1) + compute(num-2);
+    }
+}
+
+class Child extends Parent {
+    public int compute(int num) {
+        if(num <= 1) return num;
+        return compute(num-1) + compute(num-3);
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Parent obj = new Child();
+        System.out.print(obj.compute(4));
+    }
+}
+// 23년도 3회 실기와 숫자만 다르다.
+정답
+1
+```
+
+20년도 2회 기출
+```bash
+class Parent {
+    public void show() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+    public void show() {
+        System.out.println("Child");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Parent pa = new Child();
+        pa.show();
+    }
+}
+정답
+new
+```
