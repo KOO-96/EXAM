@@ -195,6 +195,7 @@ class Main {
 
 20년도 2회 기출
 ```bash
+// 밑줄에 들어갈 키워드
 class Parent {
     public void show() {
         System.out.println("Parent");
@@ -209,10 +210,209 @@ class Child extends Parent {
 
 public class Main {
     public static void main(String[] args) {
-        Parent pa = new Child();
+        Parent pa = ____ Child(); // pa라는 참조 변수 실제 객체는 없는 상태에서 new Child()라는 실제 객체를 만든다.
+                                // new는 객체를 생성하라는 뜻 즉, Child()r가 pa를 가리킨다.
+                                // 변수 타입은 Parent 실제 객체(인스턴스)는 Child
         pa.show();
     }
 }
 정답
 new
+```
+
+24년 1회 기출
+```bash
+// 실행 순서 적기
+// {5} -> {} -> {} -> {} -> {}
+class Parent {
+    int x, y;
+
+    Parent(int x, int y) { (1)
+        this.x = x;
+        this.y = y;
+    }
+
+    int getT() { (2)
+        return x * y;
+    }
+}
+
+class Child extends Parent {
+    int x;
+
+    Child(int x) { (3)
+        super(x + 1, x);
+        this.x = x;
+    }
+
+    int getT(int n) { (4)
+        return super.getT() + n;
+    }
+}
+
+class Main {
+    public static void main(String[] args) { (5)
+        Parent parent = new Child(3); (6)
+        System.out.println(parent.getT()); (7)
+    }
+}
+정답
+6 -> 3 -> 1 -> 7 -> 2
+```
+
+24년 1회 기출
+```bash
+class classOne {
+    int a, b;
+
+    public classOne(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    public void print() {
+        System.out.println(a + b);
+    }
+}
+
+class classTwo extends classOne {
+    int po = 3;
+
+    public classTwo(int i) {
+        super(i, i + 1);
+    }
+
+    public void print() {
+        System.out.println(po * po);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        classOne one = new classTwo(10);
+        one.print();
+    }
+}
+정답
+9
+```
+
+24년 3회 기출
+```bash
+public class Main {
+    public static void main(String[] args) {
+        Base a = new Derivate();
+        Derivate b = new Derivate();
+
+        System.out.print(a.getX() + a.x + b.getX() + b.x);
+    }
+}
+// a.getX() --> Derivate
+// a.x --> 3 그 이유는 메서드는 오버라이딩 하지만 변수는 오버라이딩되지 않는다
+class Base {
+    int x = 3;
+
+    int getX() {
+        return x * 2;
+    }
+}
+
+class Derivate extends Base {
+    int x = 7;
+
+    int getX() {
+        return x * 3;
+    }
+}
+정답
+52
+```
+
+25년 1회 기출
+```bash
+public class Main {
+    public static void main(String[] args) {
+        new Child(); // 자식 객체를 만들때, 부모 객체부터 만들어진다.
+                    // show는 오버라이딩된 자식 메서드가 호출된다.
+        System.out.println(Parent.total);
+    }
+}
+
+class Parent {
+    static int total = 0;
+    int v = 1;
+
+    public Parent() {
+        total += (++v);
+        show();
+    }
+
+    public void show() {
+        total += total;
+    }
+}
+
+class Child extends Parent {
+    int v = 10;
+
+    public Child() {
+        v += 2;
+        total += v++;
+        show();
+    }
+
+    @Override
+    public void show() {
+        total += total * 2;
+    }
+}
+// 풀이 순서
+total = 0, v = 1
+total = 1 + 1 = 2
+Child 객체 오버라이딩
+total = total + (2 * 2) = 6
+
+v = 10 -> 12
+total + v = 18
+
+total = total + (total * 2) = 18 + 18 *2 = 54
+```
+
+25년 2회 기출
+```bash
+public class Main {
+
+    public static class Parent {
+
+        public int x(int i) {
+            return i + 2;
+        }
+
+        public static String id() {
+            return "P";
+        }
+    }
+
+    public static class Child extends Parent {
+
+        public int x(int i) {
+            return i + 3;
+        }
+
+        public String x(String s) {
+            return s + "R";
+        }
+
+        public static String id() {
+            return "C";
+        }
+    }
+
+    public static void main(String[] args) {
+        Parent ref = new Child();
+        System.out.println(ref.x(2) + ref.id());
+    }
+}
+정답
+5P
 ```
